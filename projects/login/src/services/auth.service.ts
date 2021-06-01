@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { environment } from "../environments/environment";
 import { HttpClient } from "@angular/common/http";
-import { LoginResponse } from "../../../common/src/@types/LoginResponse";
+import {User} from "../../../common/src/@types/entity/User";
 
 @Injectable({
 	providedIn: "root",
@@ -17,6 +17,6 @@ export class AuthService {
 	}
 
 	public register(credentials: {fullName: string, username: string, displayName: string, password: string, email: string, about: string}){
-		return this.http.post<string>(`${this.baseUrl}/users/register`, credentials).toPromise();
+		return this.http.post<User>(`${this.baseUrl}/users/register`, credentials).toPromise();
 	}
 }

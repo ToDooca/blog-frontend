@@ -9,5 +9,4 @@ export interface User extends Identifiable {
 	lastName: string;
 	about: string;
 	displayName: string;
-	roles: Role[];
 }

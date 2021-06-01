@@ -8,8 +8,6 @@ import { Post } from "../../../../common/src/@types/entity/Post";
 import { PostService } from "../../services/post.service";
 import { ToastrService } from "ngx-toastr";
 import { User } from "../../../../common/src/@types/entity/User";
-import { TagService } from "../../services/tag.service";
-import { Tag } from "../../../../common/src/@types/entity/Tag";
 import { UserInfoService } from "../../../../common/src/services/user-info.service";
 
 @Component({
@@ -22,7 +20,6 @@ export class EditPostComponent implements OnInit {
 	private post: Post;
 	private user: User;
 	public categories: Category[] = [];
-	public tags: Tag[] = [];
 	public postForm = this.fb.group({
 		title: [null, Validators.required],
 		slug: [null, Validators.required],
@@ -35,7 +32,6 @@ export class EditPostComponent implements OnInit {
 	constructor(private fb: FormBuilder,
 	            private postService: PostService,
 	            private categoryService: CategoryService,
-	            private tagService: TagService,
 	            private userInfoService: UserInfoService,
 	            private toastService: ToastrService,
 	            private route: ActivatedRoute) {
@@ -46,9 +42,7 @@ export class EditPostComponent implements OnInit {
 			M.updateTextFields();
 			this.user = await this.userInfoService.getLoggedInUser();
 			this.categories = await this.categoryService.getAll();
-			this.tags = await this.tagService.getAll();
 			const id = this.route.snapshot.paramMap.get("id");
-			this.updateChipInput();
 			this.updateCategoryInput();
 
 			if (id) {
@@ -68,11 +62,6 @@ export class EditPostComponent implements OnInit {
 			body: _post.body,
 		});
 
-		const chipsInput = M.Chips.getInstance(document.querySelector(".chips")!);
-		_post.tags.forEach(tag => {
-			chipsInput.addChip({tag: tag.name});
-		});
-
 		setTimeout(() => {
 			M.textareaAutoResize(document.querySelector("textarea")!);
 			M.updateTextFields();
@@ -85,7 +74,6 @@ export class EditPostComponent implements OnInit {
 			id: this.post ? this.post.id : undefined,
 			body: this.postForm.get("body")?.value,
 			category: this.categories.find(categ => categ.id === this.postForm.get("category")?.value!)!,
-			tags: postTagChips.map(chip => this.tags.find(tag => tag.name === chip.tag)).filter(tag => !!tag) as Tag[],
 			user: this.user,
 			excerpt: this.postForm.get("excerpt")?.value,
 			published: true,
@@ -111,17 +99,4 @@ export class EditPostComponent implements OnInit {
 		});
 	}
 
-	updateChipInput() {
-		const data = Object.assign({}, ...this.tags.map(tag => ({[tag.name]: null})));
-		M.Chips.init(document.querySelector(".chips")!, {
-			onChipAdd: (element, chip) => {
-				const chipValue = chip.childNodes[0]!.textContent!.trim();
-				const tag = this.tags.find(_tag => _tag.name === chipValue);
-				if (!tag) chip.remove();
-			},
-			autocompleteOptions: {
-				data,
-			},
-		});
-	}
 }

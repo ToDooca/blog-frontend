@@ -5,8 +5,5 @@
 		<small>{{post.createdDate | date}}</small>
 	</h4>
 	<p class="flow-text">{{ post?.excerpt }}</p>
-	<div>
-		<span *ngFor="let tag of post.tags" class="blob pointer">{{tag.name}}</span>
-	</div>
 </div>
 <hr>

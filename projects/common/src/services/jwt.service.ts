@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
 import jwtDecode from "jwt-decode";
 import { CookieService } from "ngx-cookie-service";
-import { AuthService } from "../../../login/src/services/auth.service";
 
 export interface JwtToken {
 	roles: string[];

@@ -3,11 +3,12 @@
   "version": "0.0.1",
   "scripts": {
     "ng": "ng",
-    "start:blog": "ng serve blog --port 4201",
-    "start:admin": "ng serve admin --port 4202",
+    "start:blog": "ng serve blog --port 4201 --base-href=/blog/",
+    "start:admin": "ng serve admin --port 4202 --base-href=/admin/",
     "start:login": "ng serve login --port 4203 --base-href=/login/",
     "build": "ng build --prod --project=admin --base-href=/admin/ && ng build --prod --project=blog --base-href=/blog/ && ng build --prod --project=login --base-href=/login/",
-    "deploy": "rsync -havzu --progress --delete dist/ root@viking.lan:/srv/http/blog-frontend/"
+    "deploy": "rsync -havzu --progress --delete dist/ root@viking.lan:/srv/http/blog-frontend/",
+    "proxy": "node proxy/proxy.js"
   },
   "private": true,
   "dependencies": {

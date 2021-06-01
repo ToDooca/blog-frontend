@@ -10,9 +10,6 @@
 		</h6>
 		<h6 class="theme-grey-light-text">Posted at: <span class="theme-white-text">{{post?.createdDate | date}}</span>
 		</h6>
-		<div class="mt-4">
-			<span class="blob" *ngFor="let tag of post?.tags">{{tag.name}}</span>
-		</div>
 		<markdown [data]="post?.body"></markdown>
 	</div>
 </div>

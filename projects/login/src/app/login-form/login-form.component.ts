@@ -46,7 +46,7 @@ export class LoginFormComponent implements OnInit {
 
 	private static navigateExternal(username: string) {
 		if (username === "admin"){
-			window.location.href = environment.adminBaseUrl;
+			window.location.href = environment.adminBaseUrl
 		}else {
 			window.location.href = environment.blogBaseUrl;
 		}

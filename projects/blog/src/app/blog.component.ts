@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {JwtService} from "../../../common/src/services/jwt.service";
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,13 @@ import { Component } from '@angular/core';
 })
 export class BlogComponent {
   title = 'blog';
+
+  constructor(private jwt: JwtService) {
+  }
+
+  ngOnInit(): void {
+    this.jwt.isLoggedIn();
+  }
 }
+
+

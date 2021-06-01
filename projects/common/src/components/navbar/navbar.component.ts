@@ -10,7 +10,6 @@ import { environment } from "../../environments/environment";
 export class NavbarComponent implements OnInit {
 	public loggedIn = false;
 	public loginUrl = environment.loginBaseUrl;
-	public adminUrl = environment.adminBaseUrl;
 	public blogUrl = environment.blogBaseUrl;
 
 	constructor(private jwtService: JwtService) {
@@ -19,6 +18,7 @@ export class NavbarComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.loggedIn = this.jwtService.isLoggedIn();
+		console.log(this.loggedIn);
 	}
 
 	public logout(){

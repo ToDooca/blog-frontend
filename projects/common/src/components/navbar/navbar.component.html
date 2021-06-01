@@ -4,7 +4,6 @@
 		<ul id="nav-mobile" class="right hide-on-med-and-down">
 			<li><a *ngIf="!loggedIn" href="{{loginUrl}}">Login</a></li>
 			<li><a *ngIf="!loggedIn" href="{{loginUrl}}/register">Register</a></li>
-			<li><a *ngIf="loggedIn" href="{{adminUrl}}">Admin</a></li>
 			<li><a *ngIf="loggedIn" (click)="logout()">Logout</a></li>
 		</ul>
 	</div>

@@ -6,9 +6,9 @@
 export const environment = {
 	production: false,
 	baseUrl: "http://127.0.0.1:8080/blog",
-	adminBaseUrl: "http://localhost:4202/admin",
-	blogBaseUrl: "http://localhost:4201/blog",
-	loginBaseUrl: "http://localhost:4203/login",
+	adminBaseUrl: "http://localhost:3000/admin",
+	blogBaseUrl: "http://localhost:3000/blog",
+	loginBaseUrl: "http://localhost:3000/login",
 };
 
 /*
