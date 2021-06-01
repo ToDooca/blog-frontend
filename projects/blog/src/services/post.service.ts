@@ -21,6 +21,6 @@ export class PostService {
 	}
 
 	public getBySlug(slug: string) {
-		return this.http.get<Post>(`${this.baseUrl}/${slug}`).toPromise();
+		return this.http.get<Post>(`${this.baseUrl}/post/${slug}`).toPromise();
 	}
 }

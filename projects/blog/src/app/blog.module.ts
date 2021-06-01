@@ -16,6 +16,7 @@ import { PostListSkeletonComponent } from './post-list/post-list-skeleton/post-l
 import { NgxPaginationModule } from "ngx-pagination";
 import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
 import { AuthInterceptor } from "../../../common/src/services/interceptors/auth.interceptor";
+import { CreatePostComponent } from './create-post/create-post.component';
 
 @NgModule({
 	declarations: [
@@ -24,6 +25,7 @@ import { AuthInterceptor } from "../../../common/src/services/interceptors/auth.
 		PostListItemComponent,
 		PostComponent,
 		PostListSkeletonComponent,
+		CreatePostComponent,
 	],
 	imports: [
 		BlogRoutingModule,
