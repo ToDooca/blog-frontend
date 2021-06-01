@@ -16,4 +16,7 @@ export class AuthService {
 		return this.http.post<string>(`${this.baseUrl}/login`, credentials).toPromise();
 	}
 
+	public register(credentials: {fullName: string, username: string, displayName: string, password: string, email: string, about: string}){
+		return this.http.post<string>(`${this.baseUrl}/users/register`, credentials).toPromise();
+	}
 }
