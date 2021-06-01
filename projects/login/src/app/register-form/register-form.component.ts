@@ -25,8 +25,6 @@ export class RegisterFormComponent implements OnInit {
     }, {
         validator: this.ConfirmedValidator('password', 'confirmPassword')
     });
-    loading = false;
-    submitted = false;
     error: string;
 
     constructor(private fb: FormBuilder,
@@ -41,10 +39,11 @@ export class RegisterFormComponent implements OnInit {
     onSubmit() {
         this.authService.register(this.registerForm.value)
             .then(res => {
-                RegisterFormComponent.navigateExternal();
+                this.toastService.success("Uspešno ste registrovani");
+                setTimeout(()=>RegisterFormComponent.navigateExternal(), 1500);
             })
             .catch(err => {
-            this.toastService.error(err.error.error)
+            this.toastService.error(err.error.error);
         });
     }
 

@@ -36,15 +36,20 @@ export class LoginFormComponent implements OnInit {
 		this.authService.login({username, password})
 			.then(res => {
 				this.jwtService.setToken(res);
-				LoginFormComponent.navigateExternal();
+				this.toastService.success("Dobrodošli, " + username);
+				setTimeout(()=>LoginFormComponent.navigateExternal(username), 1500);
 			})
 			.catch(err => {
-				this.toastService.error(err.error.error)
+				this.toastService.error(err.error.error);
 			});
 	}
 
-	private static navigateExternal() {
-		window.location.href = environment.adminBaseUrl;
+	private static navigateExternal(username: string) {
+		if (username === "admin"){
+			window.location.href = environment.adminBaseUrl;
+		}else {
+			window.location.href = environment.blogBaseUrl;
+		}
 	}
 
 
