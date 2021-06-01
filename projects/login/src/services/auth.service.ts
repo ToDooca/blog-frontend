@@ -13,7 +13,7 @@ export class AuthService {
 	}
 
 	public login(credentials: { username: string, password: string }) {
-		return this.http.post<string>(`${this.baseUrl}/login`, credentials).toPromise();
+		return this.http.post<{token: string}>(`${this.baseUrl}/login`, credentials).toPromise();
 	}
 
 	public register(credentials: {fullName: string, username: string, displayName: string, password: string, email: string, about: string}){

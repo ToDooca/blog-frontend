@@ -35,8 +35,8 @@ export class LoginFormComponent implements OnInit {
 		const password = this.loginForm.get("password")?.value;
 		this.authService.login({username, password})
 			.then(res => {
-				this.jwtService.setToken(res);
-				this.toastService.success("Dobrodošli, " + username);
+				this.jwtService.setToken(res.token);
+				this.toastService.success("Welcome, " + username);
 				setTimeout(()=>LoginFormComponent.navigateExternal(username), 1500);
 			})
 			.catch(err => {
