@@ -20,6 +20,7 @@ export class EditPostComponent implements OnInit {
 	private post: Post;
 	private user: User;
 	public categories: Category[] = [];
+	public category?: Category = {id: undefined, name: ""};
 	public postForm = this.fb.group({
 		title: [null, Validators.required],
 		slug: [null, Validators.required],
@@ -43,7 +44,7 @@ export class EditPostComponent implements OnInit {
 			this.user = await this.userInfoService.getLoggedInUser();
 			this.categories = await this.categoryService.getAll();
 			const id = this.route.snapshot.paramMap.get("id");
-			this.updateCategoryInput();
+			setTimeout(() => this.updateCategoryInput(), 10);
 
 			if (id) {
 				this.updatePostForm(await this.postService.getById(id));
@@ -69,17 +70,17 @@ export class EditPostComponent implements OnInit {
 	}
 
 	onSubmit() {
-		const postTagChips = M.Chips.getInstance(document.querySelector(".chips")!).chipsData;
 		const post: Post = {
 			id: this.post ? this.post.id : undefined,
 			body: this.postForm.get("body")?.value,
-			category: this.categories.find(categ => categ.id === this.postForm.get("category")?.value!)!,
+			category: this.categories.find(categ => categ.id == this.postForm.get("category")?.value!)!,
 			user: this.user,
 			excerpt: this.postForm.get("excerpt")?.value,
 			published: true,
 			slug: this.postForm.get("slug")?.value,
 			title: this.postForm.get("title")?.value,
 		};
+		console.log(this.categories);
 		if (post.id) {
 			this.postService.update(post)
 				.then(() => this.toastService.info("Post saved"))
@@ -92,11 +93,16 @@ export class EditPostComponent implements OnInit {
 	}
 
 	updateCategoryInput() {
-		M.FormSelect.init(document.querySelector("#categorySelect")!, {
+		const instance = M.FormSelect.init(document.querySelector("select")!, {
 			dropdownOptions: {
-				autoTrigger: true,
+                coverTrigger: true,
+                closeOnClick: true,
+                autoTrigger: true
 			},
 		});
+		console.log(instance);
 	}
+
+
 
 }
