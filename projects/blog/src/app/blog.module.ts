@@ -17,6 +17,11 @@ import { NgxPaginationModule } from "ngx-pagination";
 import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
 import { AuthInterceptor } from "../../../common/src/services/interceptors/auth.interceptor";
 import { CreatePostComponent } from './create-post/create-post.component';
+import { ReactiveFormsModule } from "@angular/forms";
+import {SIMPLEMDE_CONFIG, SimplemdeModule} from "ng2-simplemde";
+import { TooltipModule } from "ng2-tooltip-directive";
+import { ToastrModule } from "ngx-toastr";
+import * as marked from "marked";
 
 @NgModule({
 	declarations: [
@@ -35,6 +40,7 @@ import { CreatePostComponent } from './create-post/create-post.component';
 		HttpClientModule,
 		NgxPaginationModule,
 		NgxSkeletonLoaderModule,
+		TooltipModule,
 		ScrollToModule.forRoot(),
 		MarkdownModule.forRoot({
 			loader: HttpClient,
@@ -49,6 +55,30 @@ import { CreatePostComponent } from './create-post/create-post.component';
 				},
 			},
 		}),
+		ToastrModule.forRoot({
+			timeOut: 5000,
+			maxOpened: 5,
+			preventDuplicates: true,
+			enableHtml: true,
+			positionClass: "toast-bottom-center",
+		}),
+		SimplemdeModule.forRoot({
+			provide: SIMPLEMDE_CONFIG,
+			useValue: {
+				sideBySideFullscreen: true,
+				previewRender: (plainText: string) => {
+					return marked(plainText, {gfm: true}); // Returns HTML from a custom parser
+				},
+				showIcons: ["strikethrough", "code", "table", "redo", "heading", "undo", "horizontal-rule"],
+				renderingConfig: {
+					codeSyntaxHighlighting: true,
+					markedOptions: {gfm: true},
+				},
+				spellChecker: false,
+				status: ["autosave", "cursor"],
+			},
+		}),
+		ReactiveFormsModule,
 	],
 	providers: [
 		{provide: HTTP_INTERCEPTORS, useClass: LoggingInterceptor, multi: true},

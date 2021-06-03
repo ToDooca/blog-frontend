@@ -55,6 +55,7 @@
 							"projects/blog/src/assets"
 						],
 						"styles": [
+							"node_modules/simplemde/dist/simplemde.min.css",
 							"node_modules/materialize-css/dist/css/materialize.min.css",
 							"projects/common/src/assets/scss/responsive.scss",
 							"projects/common/src/assets/scss/materialize.scss",
@@ -63,7 +64,9 @@
 							"projects/common/src/styles.scss",
 							"projects/blog/src/styles.scss"
 						],
-						"scripts": []
+						"scripts": [
+							"node_modules/materialize-css/dist/js/materialize.min.js"
+						]
 					},
 					"configurations": {
 						"production": {

@@ -1,1 +1,29 @@
 @import "projects/common/src/assets/scss/theme";
+.titleWrapper {
+  display: flex;
+  align-content: center;
+  width: 100%;
+}
+
+h1 {
+  float: left;
+}
+
+.title {
+  i {
+    color: $theme-primary !important;
+    margin: 0!important;
+  }
+  top: -5px;
+  position: relative;
+  float: right;
+  margin-left: auto;
+  height: 30px;
+  margin-top: 60px;
+  margin-right: 25px;
+}
+a:hover {
+  color: $theme-primary;
+  background-color: $theme-black;
+}
+

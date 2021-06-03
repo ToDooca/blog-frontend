@@ -6,12 +6,12 @@ import {CreatePostComponent} from "./create-post/create-post.component";
 
 const routes: Routes = [
 	{
-		path: "post/:slug",
-		component: PostComponent,
-	},
-	{
 		path: "create",
 		component: CreatePostComponent,
+	},
+	{
+		path: "post/:slug",
+		component: PostComponent,
 	},
 	{
 		path: "",

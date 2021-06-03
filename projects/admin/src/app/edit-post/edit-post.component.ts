@@ -9,6 +9,7 @@ import { PostService } from "../../services/post.service";
 import { ToastrService } from "ngx-toastr";
 import { User } from "../../../../common/src/@types/entity/User";
 import { UserInfoService } from "../../../../common/src/services/user-info.service";
+import {environment} from "../../../../login/src/environments/environment";
 
 @Component({
 	selector: "admin-edit-post",
@@ -80,29 +81,35 @@ export class EditPostComponent implements OnInit {
 			slug: this.postForm.get("slug")?.value,
 			title: this.postForm.get("title")?.value,
 		};
-		console.log(this.categories);
 		if (post.id) {
 			this.postService.update(post)
-				.then(() => this.toastService.info("Post saved"))
+				.then(() => {
+					this.toastService.info("Post saved");
+					setTimeout(() => EditPostComponent.navigateExternal(), 1500);
+				})
 				.catch(err => this.toastService.error(err.error));
 		} else {
 			this.postService.save(post)
-				.then(() => this.toastService.info("Post saved"))
+				.then(() => {
+					this.toastService.info("Post saved");
+					setTimeout(() => EditPostComponent.navigateExternal(), 1500);
+				})
 				.catch(err => this.toastService.error(err.error.error));
 		}
 	}
 
 	updateCategoryInput() {
-		const instance = M.FormSelect.init(document.querySelector("select")!, {
+		M.FormSelect.init(document.querySelector("select")!, {
 			dropdownOptions: {
                 coverTrigger: true,
                 closeOnClick: true,
                 autoTrigger: true
 			},
 		});
-		console.log(instance);
 	}
 
-
+	private static navigateExternal() {
+		window.location.href = environment.adminBaseUrl;
+	}
 
 }
