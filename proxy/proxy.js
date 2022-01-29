@@ -4,9 +4,6 @@ const fs = require("fs");
 const path = require("path");
 const PORT = process.env.PORT || "3000";
 const HttpStatus = constants;
-// process.on('uncaughtException', (error)  => {
-//   console.log('Oh my god, something terrible happened: ',  error);
-// })
 
 let routes = {};
 const proxyFilePath = path.join(__dirname, "proxy.json");
