@@ -40,7 +40,7 @@ export class EditCategoryComponent implements OnInit {
 
 	public saveOrUpdate() {
 		this.category!.name = this.categoryForm.get("name")?.value;
-		if (!this.category) {
+		if (this.category === undefined) {
 			this.toastService.error("No category selected");
 			return;
 		}
@@ -66,7 +66,7 @@ export class EditCategoryComponent implements OnInit {
 	}
 
 	public delete() {
-		if (!this.category || !this.category.id) {
+		if (this.category === undefined) {
 			this.toastService.error("No category selected");
 			return;
 		}
