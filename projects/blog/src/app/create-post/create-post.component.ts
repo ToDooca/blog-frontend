@@ -21,7 +21,7 @@ export class CreatePostComponent implements OnInit {
     private post: Post;
     private user: User;
     public categories: Category[] = [];
-    public category?: Category = {id: undefined, name: ""};
+    public category?: Category;
     public postForm = this.fb.group({
         title: [null, Validators.required],
         slug: [null, Validators.required],
@@ -50,7 +50,7 @@ export class CreatePostComponent implements OnInit {
 
     onSubmit() {
         const post: Post = {
-            id: this.post ? this.post.id : undefined,
+            id: this.post ? this.post.id : 0,
             body: this.postForm.get("body")?.value,
             category: this.categories.find(categ => categ.id == this.postForm.get("category")?.value!)!,
             user: this.user,

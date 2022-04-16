@@ -22,7 +22,6 @@ import {SIMPLEMDE_CONFIG, SimplemdeModule} from "ng2-simplemde";
 import { TooltipModule } from "ng2-tooltip-directive";
 import { ToastrModule } from "ngx-toastr";
 import * as marked from "marked";
-import { CommentComponent } from './comment/comment.component';
 
 @NgModule({
 	declarations: [
@@ -32,7 +31,6 @@ import { CommentComponent } from './comment/comment.component';
 		PostComponent,
 		PostListSkeletonComponent,
 		CreatePostComponent,
-		CommentComponent,
 	],
 	imports: [
 		BlogRoutingModule,

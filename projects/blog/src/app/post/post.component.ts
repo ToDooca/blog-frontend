@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { Post } from "../../../../common/src/@types/entity/Post";
-import { Comment } from "../../../../common/src/@types/entity/Comment";
 import { PostService } from "../../services/post.service";
 import { ActivatedRoute } from "@angular/router";
 import {FormBuilder, Validators} from "@angular/forms";
@@ -14,10 +13,6 @@ import {ToastrService} from "ngx-toastr";
 })
 export class PostComponent implements OnInit {
 	public post: Post;
-	commentList: Comment[] = [];
-	commentForm = this.formBuilder.group({
-		body: [null, Validators.required]
-	});
 
 	constructor(private postService: PostService, private route: ActivatedRoute, private formBuilder: FormBuilder, private toastr: ToastrService) {
 	}
@@ -29,21 +24,7 @@ export class PostComponent implements OnInit {
 
 	private async fetchPost(slug: string) {
 		this.post = await this.postService.getBySlug(slug);
-		this.getAllCommentsForPost()
 	}
 
-	addComment(postId: number) {
-		this.postService.saveCommentForPost(postId, this.commentForm.value.body).then(() => {
-			this.toastr.success("Uspešno ste postavili komentar");
-		}).catch(e => {
-			this.toastr.error(e);
-		});
-	};
-
-	private getAllCommentsForPost() {
-		this.postService.getAllCommentsForPost(this.post.id!).then(comments => {
-			this.commentList = comments;
-		})
-	}
 
 }

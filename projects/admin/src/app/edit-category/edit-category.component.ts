@@ -13,7 +13,7 @@ import { FormGroup, FormControl } from "@angular/forms";
 export class EditCategoryComponent implements OnInit {
 
 	public categories: Category[] = [];
-	public category?: Category = {id: undefined, name: ""};
+	public category?: Category = undefined;
 	public categoryForm = new FormGroup({
 		"name": new FormControl(this.category?.name),
 	});
@@ -31,7 +31,7 @@ export class EditCategoryComponent implements OnInit {
 	}
 
 	public resetForm() {
-		this.category = {id: undefined, name: ""};
+		this.category = undefined;
 		setTimeout(() => this.initCategorySelect(), 10);
 		const selectInstance = M.FormSelect.getInstance(document.querySelector("select")!);
 		selectInstance.input.value = (selectInstance.el as HTMLSelectElement).options[0].text;
